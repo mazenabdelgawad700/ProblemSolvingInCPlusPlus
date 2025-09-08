@@ -420,8 +420,35 @@ bool isAnagram(string s, string t) {
 	return true;
 }
 
+bool isHappy(int n) {
+	int temp = n, sum = 0;
+	map<int, int> dict;
+	while (true)
+	{
+		while (temp)
+		{
+			int digit = temp % 10;
+			digit = pow(digit, 2);
+			sum += digit;
+			temp /= 10;
+		}
+
+		if (sum == 1)
+			return true;
+
+		if (dict.find(sum) != dict.end())
+			return false;
+		else
+			dict[sum] = 1;
+
+		temp = sum;
+		sum = 0;
+	}
+	return false;
+}
+
 int main()
 {
-	cout << isAnagram("car", "rat") << endl;
+	cout << isHappy(3) << endl;
     system("pause>0");
 }
