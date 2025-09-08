@@ -468,8 +468,30 @@ vector<int> twoSum2(vector<int>& nums, int target) {
 	return result;
 }
 
+bool containsNearbyDuplicate(vector<int>& nums, int k) {
+	map<int, int> dict;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (dict.find(nums[i]) != dict.end())
+		{
+			int res = abs(dict[nums[i]] - i);
+			if (res <= k)
+				return true;
+			else
+				dict[nums[i]] = i;
+		}
+		else
+		{
+			dict[nums[i]] = i;
+		}
+	}
+	return false;
+}
+
 int main()
 {
+	vector<int> test = { 1,2,3,1 };
+	cout << containsNearbyDuplicate(test, 3) << endl;
 
     system("pause>0");
 }
