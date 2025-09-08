@@ -447,8 +447,29 @@ bool isHappy(int n) {
 	return false;
 }
 
+vector<int> twoSum2(vector<int>& nums, int target) {
+	map<int, int> dict;
+	vector<int> result;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		dict[nums[i]] = i;
+	}
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		int val = target - nums[i];
+		if (dict.find(val) != dict.end() && i != dict[val])
+		{
+			result.push_back(i);
+			result.push_back(dict[val]);
+			return result;
+		}
+	}
+	return result;
+}
+
 int main()
 {
-	cout << isHappy(3) << endl;
+
     system("pause>0");
 }
