@@ -387,9 +387,41 @@ bool isIsomorphic(string s, string t) {
 	}
 	return true;
 }
+	
+bool isAnagram(string s, string t) {
+	map<char, int> dict;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (dict.find(s[i]) == dict.end())
+		{
+			dict[s[i]] = 1;
+		}
+		else {
+			dict[s[i]]++;
+		}
+	}
+
+	for (int i = 0; i < t.length(); i++)
+	{
+		if (dict.find(t[i]) == dict.end() || !dict[t[i]])
+			return false;
+		else 
+		{ 
+			dict[t[i]]--;
+		}
+	}
+
+	for (auto& c : dict)
+	{
+		if (c.second)
+			return false;
+	}
+
+	return true;
+}
 
 int main()
 {
-	cout << isIsomorphic("badc", "baba") << endl;
+	cout << isAnagram("car", "rat") << endl;
     system("pause>0");
 }
