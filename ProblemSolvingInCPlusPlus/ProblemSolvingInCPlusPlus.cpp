@@ -488,10 +488,24 @@ bool containsNearbyDuplicate(vector<int>& nums, int k) {
 	return false;
 }
 
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+	map<string, vector<string>> dict;
+	for (int i = 0; i < strs.size(); i++)
+	{
+		string s = strs[i];
+		sort(s.begin(), s.end());
+		dict[s].push_back(strs[i]);
+	}
+	vector<vector<string>> result;
+	for (auto& entry : dict)
+	{
+		result.push_back(entry.second);
+	}
+	return result;
+}
+
 int main()
-{
-	vector<int> test = { 1,2,3,1 };
-	cout << containsNearbyDuplicate(test, 3) << endl;
+{	
 
     system("pause>0");
 }
