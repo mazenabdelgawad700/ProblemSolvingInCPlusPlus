@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <sstream>
 #include<map>
+#include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -504,8 +506,28 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
 	return result;
 }
 
+int longestConsecutive(vector<int>& nums) {
+	unordered_set<int> numSet(nums.begin(), nums.end());
+	int longest = 0;
+
+	for (int num : numSet) {
+		if (numSet.find(num - 1) == numSet.end()) {
+			int currentNum = num;
+			int length = 1;
+
+			while (numSet.find(currentNum + 1) != numSet.end()) {
+				currentNum++;
+				length++;
+			}
+
+			longest = max(longest, length);
+		}
+	}
+	return longest;
+}
+
 int main()
-{	
+{
 
     system("pause>0");
 }
