@@ -543,8 +543,43 @@ vector<string> summaryRanges(vector<int>& nums) {
 	return result;
 }
 
+string simplifyPath(string path) {
+	vector<string> stack;
+	string current = "";
+
+	path += "/";
+
+	for (char c : path) {
+		if (c == '/') {
+			if (current == "..") {
+				if (!stack.empty()) {
+					stack.pop_back();
+				}
+			}
+			else if (current != "" && current != ".") {
+				stack.push_back(current);
+			}
+			current = "";
+		}
+		else {
+			current += c;
+		}
+	}
+
+	string result = "/";
+	for (const string& dir : stack) {
+		result += dir + "/";
+	}
+
+	if (result.length() > 1) {
+		result.pop_back();
+	}
+
+	return result;
+}
+
 int main()
 {
 
-    system("pause>0");
+	system("pause>0");
 }
