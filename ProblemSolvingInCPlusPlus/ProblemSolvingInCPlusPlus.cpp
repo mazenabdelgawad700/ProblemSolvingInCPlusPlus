@@ -628,6 +628,20 @@ int evalRPN(vector<string>& tokens) {
 	return st.top();
 }
 
+bool hasCycle(ListNode* head) {
+	set<ListNode*> set;
+	ListNode* temp = head;
+	while (temp)
+	{
+		if (set.find(temp) == set.end())
+			set.insert(temp);
+		else
+			return true;
+		temp = temp->next;
+	}
+	return false;
+}
+
 int main()
 { 
 
