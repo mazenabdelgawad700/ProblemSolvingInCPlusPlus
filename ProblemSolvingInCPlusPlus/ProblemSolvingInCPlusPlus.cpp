@@ -690,6 +690,45 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 	return dummy.next;
 }
 
+class Node {
+public:
+	int val;
+	Node* next;
+	Node* random;
+
+	Node(int _val) {
+		val = _val;
+		next = NULL;
+		random = NULL;
+	}
+};
+
+Node* copyRandomList(Node* head) {
+	Node* newHead = new Node(0);
+	map<Node*, Node*> dict;
+	Node* temp = head;
+	Node* curr = newHead;
+	while (temp)
+	{
+		Node* newNode = new Node(temp->val);
+		dict[temp] = newNode;
+		curr->next = newNode;
+		curr = curr->next;
+		temp = temp->next;
+	}
+	temp = head;
+	curr = newHead->next;
+	while (temp)
+	{
+		if (temp->random)
+			curr->random = dict[temp->random];
+		temp = temp->next;
+		curr = curr->next;
+	}
+	return newHead->next;
+}
+
+
 int main()
 { 
 
