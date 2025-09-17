@@ -728,6 +728,47 @@ Node* copyRandomList(Node* head) {
 	return newHead->next;
 }
 
+ListNode* reverseBetween(ListNode* head, int left, int right) {
+	if (!head || left == right) return head;
+
+	ListNode dummy(0);
+	dummy.next = head;
+	ListNode* prev = &dummy;
+
+	for (int i = 0; i < left - 1; i++) {
+		prev = prev->next;
+	}
+
+	ListNode* curr = prev->next;
+	ListNode* next = nullptr;
+
+	for (int i = 0; i < right - left + 1; i++) {
+		next = curr->next;
+		curr->next = prev->next;
+		prev->next = curr;
+		curr = next;
+	}
+
+	return dummy.next;
+}
+
+ListNode* deleteDuplicates(ListNode* head) {
+	ListNode dummy(0);
+	ListNode* curr = &dummy;
+	dummy.next = head;
+
+	while(curr->next && curr->next->next) {
+		if (curr->next->val == curr->next->next->val) {
+			int val = curr->next->val;
+			while (curr->next && curr->next->val == val) {
+				curr->next = curr->next->next;
+			}
+		} else {
+			curr = curr->next;
+		}
+	}
+	return dummy.next;
+}
 
 int main()
 { 
