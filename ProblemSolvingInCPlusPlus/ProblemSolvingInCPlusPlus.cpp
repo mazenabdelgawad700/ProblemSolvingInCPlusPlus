@@ -770,6 +770,14 @@ ListNode* deleteDuplicates(ListNode* head) {
 	return dummy.next;
 }
 
+int maxDepth(TreeNode* root) {
+	TreeNode* temp = root;
+	if (!temp) return 0;
+	int leftDepth = maxDepth(temp->left);
+	int rightDepth = maxDepth(temp->right);
+	return max(leftDepth, rightDepth) + 1;
+}
+
 int main()
 { 
 
