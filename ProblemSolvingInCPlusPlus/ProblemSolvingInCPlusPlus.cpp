@@ -788,6 +788,21 @@ bool isSameTree(TreeNode* p, TreeNode* q) {
 	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 }
 
+TreeNode* invertTree(TreeNode* root) {
+	if (root->right)
+	{
+		invertTree(root->right);
+	}
+	if (root->left)
+	{
+		invertTree(root->left);
+	}
+	TreeNode* temp = root->left;
+	root->left = root->right;
+	root->right = temp;
+	return root;
+}
+
 int main()
 { 
 
