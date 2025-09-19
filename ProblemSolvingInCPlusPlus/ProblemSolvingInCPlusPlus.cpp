@@ -803,7 +803,6 @@ TreeNode* invertTree(TreeNode* root) {
 	return root;
 }
 
-
 bool isMirror(TreeNode* t1, TreeNode* t2) {
 	if (!t1 || !t2) return false;
 	if (!t1 && !t2) return true;
@@ -814,6 +813,13 @@ bool isMirror(TreeNode* t1, TreeNode* t2) {
 bool isSymmetric(TreeNode* root) {
 	if (!root) return false;
 	return isMirror(root->left, root->right);
+}
+
+bool hasPathSum(TreeNode* root, int targetSum) {
+	if (!root) return false;
+	if(!root->left && !root->right && targetSum - root->val == 0)
+		return true;
+	return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
 }
 
 int main()
