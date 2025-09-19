@@ -822,6 +822,49 @@ bool hasPathSum(TreeNode* root, int targetSum) {
 	return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
 }
 
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+	int i = m - 1, j = n - 1, k = m + n - 1;
+ 	while (i >= 0 && j >= 0) { 
+		if (nums1[i] > nums2[j]) {
+			nums1[k--] = nums1[i--];
+		} else {
+			nums1[k--] = nums2[j--];
+		}
+	}
+	while (j >= 0) {
+		nums1[k--] = nums2[j--];
+	}
+}
+
+int thirdMax(vector<int>& nums) {
+	vector<int> uniqueNums;
+	for (int num : nums) {
+		if (find(uniqueNums.begin(), uniqueNums.end(), num) == uniqueNums.end()) {
+			uniqueNums.push_back(num);
+		}
+	}
+	sort(uniqueNums.begin(), uniqueNums.end(), greater<int>());
+	if (uniqueNums.size() < 3) {
+		return uniqueNums[0];
+	} else {
+		return uniqueNums[2];
+	}
+}
+
+vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+	vector<int> result;
+	for(int i = 0; i < nums.size(); i++)
+	{
+		int count = 0;
+		for (int j = 0; j < nums.size(); j++)
+		{
+			if (nums[j] < nums[i])
+				count++;
+		}
+		result.push_back(count);
+	}
+	return result;
+}
 int main()
 { 
 
