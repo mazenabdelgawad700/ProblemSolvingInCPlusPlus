@@ -227,7 +227,6 @@ int lengthOfLongestSubstring(string s) {
 	return maxLen;
 }
 
-
 bool isValidSudoku(vector<vector<char>>& board) {
 
 	for (int r = 0; r < 9; r++) { 
@@ -864,6 +863,41 @@ vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
 		result.push_back(count);
 	}
 	return result;
+}
+
+void flatten(TreeNode* root) {
+	TreeNode* temp = root;
+	while(temp)
+	{
+		if (temp->left)
+		{
+			TreeNode* rightmost = temp->left;
+			while (rightmost->right)
+			{
+				rightmost = rightmost->right;
+			}
+			rightmost->right = temp->right;
+			temp->right = temp->left;
+			temp->left = nullptr;
+		}
+		temp = temp->right;
+	}
+}
+
+int sumNumbersHelper(TreeNode* root, int currentSum)
+{
+	if (!root) return 0;
+	currentSum = currentSum * 10 + root->val;
+	if (!root->left && !root->right)
+		return currentSum;
+	return sumNumbersHelper(root->left, currentSum) + sumNumbersHelper(root->right, currentSum);
+}
+int sumNumbers(TreeNode* root) {
+	TreeNode* temp = root;
+	if (!temp) return 0;
+	int sum = 0;
+	sum = sumNumbersHelper(temp, 0);
+	return sum;
 }
 
 int main()
