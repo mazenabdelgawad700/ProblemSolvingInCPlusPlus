@@ -1066,6 +1066,22 @@ vector<int> inorderTraversal(TreeNode* root) {
 	return result;
 }
 
+int calcHeight(TreeNode* root)
+{
+	if (!root) return 0;
+	int left_height = calcHeight(root->left);
+	int right_height = calcHeight(root->right);
+	return max(left_height, right_height) + 1;
+}
+bool isBalanced(TreeNode* root) {
+	if (!root) return true;
+	int left_height = calcHeight(root->left);
+	int right_height = calcHeight(root->right);
+	if (abs(left_height - right_height) > 1)
+		return false;
+	return isBalanced(root->left) && isBalanced(root->right);
+}
+
 
 
 int main()
