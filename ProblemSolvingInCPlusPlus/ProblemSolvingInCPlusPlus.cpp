@@ -927,8 +927,94 @@ vector<int> rightSideView(TreeNode* root)
 	return result;
 }
 
+int maxFrequencyElements(vector<int>& nums) {
+	int* arr = new int[101](); 
+
+	for (int i = 0; i < nums.size(); i++) {
+		arr[nums[i]]++;
+	}
+
+	int maxFreq = 0;
+	for (int i = 0; i < 101; i++) {
+		if (arr[i] > maxFreq) {
+			maxFreq = arr[i];
+		}
+	}
+
+	int count = 0;
+	for (int i = 0; i < 101; i++) {
+		if (arr[i] == maxFreq) {
+			count += arr[i]; 
+		}
+	}
+
+	delete[] arr;
+	return count;
+}
+
+int searchInsert(vector<int>& nums, int target) {
+	int l = 0, r = nums.size() - 1, med = 0;
+	
+	while (r >= l)
+	{
+		med = (l + r) / 2;
+		if (nums[med] == target)
+			return med;
+		else if (target < nums[med])
+			r = med - 1;
+		else
+			l = med + 1;
+
+	}
+	return med + 1;
+}
+
+vector<int> plusOne(vector<int>& digits) {
+	int last_digit = digits[digits.size() - 1];
+	if (last_digit < 9)
+	{
+		digits[digits.size() - 1] += 1;
+		return digits;
+	}
+	else
+	{
+		int index = digits.size() - 1;
+		while (digits[index] == 9 && index > 0)
+		{
+			digits[index] = 0;
+			index--;
+		}
+		if (digits[index] == 9)
+		{
+			digits[index] = 0;
+			digits.insert(digits.begin(), 1);
+		}
+		else 
+			digits[index] += 1;
+		
+	}
+	return digits;
+
+}
+
+int mySqrt(int x) {
+	if (x == 0) return 0;
+	int left = 1, right = x, ans = 0;
+	while (left <= right) {
+		int mid = left + (right - left) / 2;
+		if (mid <= x / mid) {
+			ans = mid; 
+			left = mid + 1; 
+		} else {
+			right = mid - 1; 
+		}
+	}
+	return ans;
+}
+
 int main()
 { 
+	cout << mySqrt(8) << endl;
 
 	system("pause>0");
 }
