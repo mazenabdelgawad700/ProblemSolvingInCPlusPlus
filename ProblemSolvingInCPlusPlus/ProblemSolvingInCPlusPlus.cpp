@@ -1082,7 +1082,41 @@ bool isBalanced(TreeNode* root) {
 	return isBalanced(root->left) && isBalanced(root->right);
 }
 
+ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+	set<ListNode*> nodesInA;
+	ListNode* currentA = headA;
+	while (currentA) {
+		nodesInA.insert(currentA);
+		currentA = currentA->next;
+	}
+	ListNode* currentB = headB;
+	while (currentB) {
+		if (nodesInA.find(currentB) != nodesInA.end()) {
+			return currentB; 
+		}
+		currentB = currentB->next;
+	}
+	return nullptr;
+}
 
+ListNode* removeElements(ListNode* head, int val)
+{
+	ListNode* dummy = new ListNode(0);
+	dummy->next = head;
+	ListNode* current = dummy;
+	while (current->next)
+	{
+		if (current->next->val == val)
+		{
+			current->next = current->next->next;
+		}
+		else
+		{
+			current = current->next;
+		}
+	}
+	return dummy->next;
+}
 
 int main()
 { 
