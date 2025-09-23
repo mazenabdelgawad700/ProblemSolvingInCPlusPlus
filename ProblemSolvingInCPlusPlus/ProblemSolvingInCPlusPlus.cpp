@@ -1025,6 +1025,49 @@ int climbStairs(int n)
 	return third;
 }
 
+ListNode* deleteDuplicates(ListNode* head) {
+	ListNode* current = head;
+	while (current && current->next)
+	{
+		if(current->val == current->next->val)
+		{
+			ListNode* temp = current->next;
+			current->next = current->next->next;
+			delete temp; 
+		}
+		else
+		{
+			current = current->next;
+		}
+	}
+	return head;
+}
+
+vector<int> inorderTraversal(TreeNode* root) {
+	if (!root) return {};
+	vector<int> result;
+	stack<TreeNode*> st;
+	TreeNode* current = root;
+	while (current || !st.empty())
+	{
+		while(current)
+		{
+			st.push(current);
+			current = current->left;
+		}
+		if (!st.empty())
+		{
+			current = st.top();
+			st.pop();
+			result.push_back(current->val);
+			current = current->right;
+		}
+	}
+	return result;
+}
+
+
+
 int main()
 { 
 	cout << mySqrt(8) << endl;
