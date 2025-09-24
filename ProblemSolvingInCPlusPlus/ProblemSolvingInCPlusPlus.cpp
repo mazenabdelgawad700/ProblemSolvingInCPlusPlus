@@ -1137,9 +1137,41 @@ string convertToTitle(int columnNumber) {
 	return result;
 }
 
+ListNode* reverseList(ListNode* head) {
+	ListNode* prev = nullptr;
+	ListNode* current = head;
+	while (current)
+	{
+		ListNode* nextTemp = current->next;
+		current->next = prev;
+		prev = current;
+		current = nextTemp;
+	}
+	return prev;
+}
+
+bool isPowerOfTwo(int n) {
+	int l = 0, r = n - 1;
+	while (l <= r)
+	{
+		int mid = (l + r) / 2;
+		if (pow(2, mid) == n)
+			return true;
+		else if (pow(2, mid) > n)
+		{
+			r = mid - 1;
+		}
+		else
+		{
+			l = mid + 1;
+		}
+	}
+	return false;
+}
+
 int main()
 { 
-	cout << convertToTitle(701) << endl;
+	cout << isPowerOfTwo(16) << endl;
 
 	system("pause>0");
 }
