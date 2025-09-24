@@ -1025,7 +1025,7 @@ int climbStairs(int n)
 	return third;
 }
 
-ListNode* deleteDuplicates(ListNode* head) {
+ListNode* deleteDuplicates2(ListNode* head) {
 	ListNode* current = head;
 	while (current && current->next)
 	{
@@ -1118,9 +1118,28 @@ ListNode* removeElements(ListNode* head, int val)
 	return dummy->next;
 }
 
+string convertToTitle(int columnNumber) {
+	string result = "";
+	map<int, char> alphaMap = {
+	{0, 'A'}, {1, 'B'}, {2, 'C'}, {3, 'D'}, {4, 'E'}, {5, 'F'},
+	{6, 'G'}, {7, 'H'}, {8, 'I'}, {9, 'J'}, {10, 'K'}, {11, 'L'},
+	{12, 'M'}, {13, 'N'}, {14, 'O'}, {15, 'P'}, {16, 'Q'}, {17, 'R'},
+	{18, 'S'}, {19, 'T'}, {20, 'U'}, {21, 'V'}, {22, 'W'}, {23, 'X'},
+	{24, 'Y'}, {25, 'Z'}
+	};
+
+	while (columnNumber)
+	{
+		result.insert(result.begin(), alphaMap[(columnNumber - 1) % 26]);
+		columnNumber -= 1;
+		columnNumber /= 26;
+	}
+	return result;
+}
+
 int main()
 { 
-	cout << mySqrt(8) << endl;
+	cout << convertToTitle(701) << endl;
 
 	system("pause>0");
 }
