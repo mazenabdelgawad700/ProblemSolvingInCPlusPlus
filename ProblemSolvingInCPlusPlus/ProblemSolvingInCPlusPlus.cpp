@@ -1232,6 +1232,23 @@ vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
 	return result;
 }
 
+bool isPerfectSquare(int num) {
+	if (num < 2) return true;
+	int left = 2, right = num / 2;
+	while (left <= right) {
+		int mid = left + (right - left) / 2;
+		long long guessedSquare = (long long)mid * mid;
+		if (guessedSquare == num) {
+			return true;
+		} else if (guessedSquare < num) {
+			left = mid + 1;
+		} else {
+			right = mid - 1;
+		}
+	}
+	return false;
+}
+
 int main()
 { 
 	system("pause>0");
