@@ -1195,9 +1195,44 @@ vector<string> binaryTreePaths(TreeNode* root) {
 	return result;
 }
 
+void moveZeroes(vector<int>& nums) {
+	for (int i = 0; i < nums.size(); i++)
+	{
+		for (int j = i + 1; j < nums.size(); j++)
+		{
+			if (!nums[i])
+			{
+				nums[i] = nums[j];
+				nums[j] = 0;
+			}
+		}
+	}
+}
+
+vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+	map<int, int> dict;
+	vector<int> result;
+	
+	for (int i = 0; i < nums1.size(); i++)
+	{
+		if (dict.find(nums1[i]) == dict.end())
+			dict[nums1[i]] = 1;
+		else
+			dict[nums1[i]]++;
+	}
+
+	for (int i = 0; i < nums2.size(); i++)
+	{
+		if (dict.find(nums2[i]) != dict.end() && dict[nums2[i]])
+		{
+			result.push_back(nums2[i]);
+			dict[nums2[i]]--;
+		}
+	}
+	return result;
+}
+
 int main()
 { 
-	cout << isPowerOfTwo(16) << endl;
-
 	system("pause>0");
 }
