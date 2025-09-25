@@ -1249,7 +1249,35 @@ bool isPerfectSquare(int num) {
 	return false;
 }
 
+int firstUniqChar(string s) {
+	unordered_map<char, int> dict;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (dict.find(s[i]) != dict.end())
+			dict[s[i]] = -1;
+		else 
+			dict[s[i]] = 1;
+	}
+
+	char character = ' ';
+	for (const auto& p : dict)
+	{
+		if (p.second == 1)
+		{
+			character = p.first;
+			break;
+		}
+	}
+	for (int i = 0; i < s.length(); i++)
+		if (s[i] == character)
+			return i;
+
+	return -1;
+}
+
 int main()
 { 
+	cout << firstUniqChar("loveleetcode") << endl;
+
 	system("pause>0");
 }
