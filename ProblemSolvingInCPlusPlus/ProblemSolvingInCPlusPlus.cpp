@@ -1297,9 +1297,35 @@ int sumOfLeftLeaves(TreeNode* root) {
 	return sum;
 }
 
+int longestPalindrome(string s) {
+	map<char, int> dict;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (dict.find(s[i]) != dict.end())
+			dict[s[i]]++;
+		else
+			dict[s[i]] = 1;
+	}
+
+	int length = 0;
+	bool odd_flag = false;
+	for (const auto& p : dict)
+	{
+		if (p.second % 2 == 0)
+			length += p.second;
+		else if (p.second % 2 != 0)
+		{
+			length += p.second - 1;
+			odd_flag = true;
+		}
+	}
+	if (odd_flag)
+		length += 1;
+
+	return length;
+}
+
 int main()
 { 
-	cout << firstUniqChar("loveleetcode") << endl;
-
 	system("pause>0");
 }
