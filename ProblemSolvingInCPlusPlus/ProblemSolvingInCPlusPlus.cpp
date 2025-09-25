@@ -1275,6 +1275,28 @@ int firstUniqChar(string s) {
 	return -1;
 }
 
+int sumOfLeftLeaves(TreeNode* root) {
+	queue<TreeNode*> q;
+	int sum = 0;
+	q.push(root);
+	while (!q.empty())
+	{
+		TreeNode* node = q.front();
+		q.pop();
+		if (node->left)
+		{
+			if (!node->left->left && !node->left->right)
+				sum += node->left->val;
+			else
+				q.push(node->left);
+		}
+		if(node->right)
+			q.push(node->right);
+
+	}
+	return sum;
+}
+
 int main()
 { 
 	cout << firstUniqChar("loveleetcode") << endl;
