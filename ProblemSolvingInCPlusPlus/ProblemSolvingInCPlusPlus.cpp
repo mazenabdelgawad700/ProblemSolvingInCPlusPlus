@@ -1392,6 +1392,11 @@ bool repeatedSubstringPattern(string s) {
 	return false;
 }
 
+int fib(int n) {
+	if (n <= 2) return 1;
+	return fib(n - 1) + fib(n - 2);
+}
+
 int main()
 { 
 	system("pause>0");
