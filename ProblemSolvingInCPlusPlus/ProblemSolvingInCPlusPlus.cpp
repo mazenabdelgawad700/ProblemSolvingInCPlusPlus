@@ -1408,7 +1408,32 @@ vector<int> constructRectangle(int area) {
 	return result;
 }
 
+vector<int> findMode(TreeNode* root) {
+	map<int, int> countMap;
+	int max_count = 0;
+	TreeNode* current = root;
+	queue<TreeNode*> q;
+	q.push(current);
 
+	while(!q.empty())
+	{
+		TreeNode* node = q.front();
+		q.pop();
+		countMap[node->val]++;
+		max_count = max(max_count, countMap[node->val]);
+		if (node->left)
+			q.push(node->left);
+		if (node->right)
+			q.push(node->right);
+	}
+	vector<int> modes;
+	for (const auto& p : countMap)
+	{
+		if (p.second == max_count)
+			modes.push_back(p.first);
+	}
+	return modes;
+}
 
 int main()
 { 
