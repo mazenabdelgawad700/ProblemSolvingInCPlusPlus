@@ -1397,6 +1397,19 @@ int fib(int n) {
 	return fib(n - 1) + fib(n - 2);
 }
 
+vector<int> constructRectangle(int area) {
+	vector<int> result(2);
+	int width = sqrt(area);
+	while (area % width != 0) {
+		width--;
+	}
+	result[0] = area / width;
+	result[1] = width;
+	return result;
+}
+
+
+
 int main()
 { 
 	system("pause>0");
