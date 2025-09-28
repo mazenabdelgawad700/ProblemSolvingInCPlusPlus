@@ -1435,7 +1435,59 @@ vector<int> findMode(TreeNode* root) {
 	return modes;
 }
 
+vector<string> findRelativeRanks(vector<int>& score) {
+	vector<string> result(score.size());
+	vector<int> sortedScore = score;
+	sort(sortedScore.begin(), sortedScore.end(), greater<int>());
+	map<int, string> rankMap;
+	for (int i = 0; i < sortedScore.size(); i++)
+	{
+		if (i == 0)
+			rankMap[sortedScore[i]] = "Gold Medal";
+		else if (i == 1)
+			rankMap[sortedScore[i]] = "Silver Medal";
+		else if (i == 2)
+			rankMap[sortedScore[i]] = "Bronze Medal";
+		else
+			rankMap[sortedScore[i]] = to_string(i + 1);
+	}
+	for (int i = 0; i < score.size(); i++)
+	{
+		result[i] = rankMap[score[i]];
+	}
+	return result;
+}
+
+bool detectCapitalUse(string word)
+{
+	if (word.length() == 1)
+		return true;
+
+	bool isFirstUpper = isupper(word[0]);
+	bool isSecondUpper = isupper(word[1]);
+
+	if (!isFirstUpper && isSecondUpper) {
+		return false;
+	}
+
+	for (int i = 2; i < word.length(); i++) {
+		if (isFirstUpper && isSecondUpper) {
+			if (!isupper(word[i]))
+				return false;
+		}
+		else {
+			if (isupper(word[i]))
+				return false;
+		}
+	}
+	return true;
+}
+
+
+
 int main()
 { 
+	cout << detectCapitalUse("mL") << endl;
+
 	system("pause>0");
 }
