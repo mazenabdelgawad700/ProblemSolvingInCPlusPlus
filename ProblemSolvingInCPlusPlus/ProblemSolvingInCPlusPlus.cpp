@@ -1497,6 +1497,38 @@ int tribonacci(int n) {
 	return storage[n];
 }
 
+void num_islands_dfs(vector<vector<char>>& grid, int i, int j)
+{
+	if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size())
+		return;
+
+	if (grid[i][j] == '0')
+		return;
+
+	grid[i][j] = '0';
+	num_islands_dfs(grid, i, j + 1); // right
+	num_islands_dfs(grid, i + 1, j); // bottom
+	num_islands_dfs(grid, i, j - 1); // left
+	num_islands_dfs(grid, i - 1, j); // top
+}
+int numIslands(vector<vector<char>>& grid) {
+	int rows = grid.size();
+	int cols = grid[0].size();
+	int islands = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (grid[i][j] == '1')
+			{
+				islands++;
+				num_islands_dfs(grid, i, j);
+			}
+		}
+	}
+	return islands;
+}
+
 int main()
 { 
 	system("pause>0");
