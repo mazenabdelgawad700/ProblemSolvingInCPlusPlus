@@ -1529,6 +1529,28 @@ int numIslands(vector<vector<char>>& grid) {
 	return islands;
 }
 
+vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
+	sort(intervals.begin(), intervals.end());
+
+	vector<vector<int>> output;
+	output.push_back(intervals[0]);
+
+	for (int i = 1; i < intervals.size(); ++i) {
+		int lastEnd = output.back()[1];
+		int start = intervals[i][0];
+		int end = intervals[i][1];
+
+		if (start <= lastEnd) {
+			output.back()[1] = max(lastEnd, end);
+		}
+		else {
+			output.push_back({ start, end });
+		}
+	}
+
+	return output;
+}
+
 int main()
 { 
 	system("pause>0");
