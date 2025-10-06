@@ -1551,6 +1551,30 @@ vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
 	return output;
 }
 
+bool compareTree(TreeNode* root, TreeNode* subRoot)
+{
+	if (!root && !subRoot)
+		return true;
+
+	if (!root || !subRoot)
+		return false;
+
+	if (root->val != subRoot->val)
+		return false;
+
+	return compareTree(root->left, subRoot->left) && compareTree(root->right, subRoot->right);
+}
+bool isSubtree(TreeNode* root, TreeNode* subRoot)
+{
+	if (!root)
+		return false;
+
+	if (compareTree(root, subRoot))
+		return true;
+
+	return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+}
+
 int main()
 { 
 	system("pause>0");
