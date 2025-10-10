@@ -1619,6 +1619,29 @@ int countPairs(vector<int>& nums, int k) {
 	return counter;
 }
 
+int countSymmetricIntegers(int low, int high) {
+	int counter = 0;
+	for (int i = low; i <= high; i++)
+	{
+		string num = to_string(i);
+
+		if (num.size() % 2 != 0) 
+			continue;
+
+		int first_half_sum = 0;
+		for (int j = 0; j < num.size() / 2; j++)
+			first_half_sum += num[j] - '0';
+
+		int second_half_sum = 0;
+		for (int j = num.size() / 2; j < num.size(); j++)
+			second_half_sum += num[j] - '0';
+
+		if (first_half_sum == second_half_sum)
+			counter++;
+	}
+	return counter;
+}
+
 
 
 int main()
