@@ -1642,9 +1642,49 @@ int countSymmetricIntegers(int low, int high) {
 	return counter;
 }
 
+bool canPartition(vector<int>& nums) {
+	int total_sum = 0;
+	for (int num : nums)
+		total_sum += num;
+	
+	if (total_sum % 2 != 0)
+		return false;
+	
+	int target = total_sum / 2;
+	
+	vector<bool> dp(target + 1, false);
+	
+	dp[0] = true;
+	
+	for (int num : nums) {
+		for (int j = target; j >= num; j--) {
+			dp[j] = dp[j] || dp[j - num];
+		}
+	}
+	
+	return dp[target];
+}
+
+int numTeams(vector<int>& rating) {
+	int teams_counter = 0;
+	for (int i = 0; i < rating.size(); i++)
+	{
+		for (int j = i + 1; j < rating.size(); j++)
+		{
+			for (int k = j + 1; k < rating.size(); k++)
+			{
+				if (rating[i] < rating[j] && rating[j] < rating[k])
+					teams_counter++;
+				else if (rating[i] > rating[j] && rating[j] > rating[k])
+					teams_counter++;
+			}
+		}
+	}
+	return teams_counter;
+}
 
 
 int main()
-{ 
+{
 	system("pause>0");
 }
