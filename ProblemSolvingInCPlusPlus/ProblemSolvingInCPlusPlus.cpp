@@ -1713,6 +1713,28 @@ int numTeams(vector<int>& rating) {
 	return cnt;
 }
 
+int memo[1001][1001];
+int solve(int idx, int current_width, int maxHeight,  vector<vector<int>>& books, int shelfWidth)
+{
+	if (idx == books.size())
+		return maxHeight;
+
+	if (memo[idx][current_width] != -1)
+		return memo[idx][current_width];
+
+	int op1 = 1e9;
+	if(current_width >= books[idx][0])
+		op1 = solve(idx + 1, current_width - books[idx][0], max(maxHeight, books[idx][1]), books, shelfWidth);
+
+	int op2 = maxHeight + solve(idx + 1, shelfWidth - books[idx][0], books[idx][1], books, shelfWidth);
+	
+	memo[idx][current_width] = min(op1, op2);
+	return min(op1, op2);
+}
+int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
+	memset(memo, -1, sizeof memo);
+	return solve(0, shelfWidth, 0, books, shelfWidth);
+}
 
 int main()
 {
