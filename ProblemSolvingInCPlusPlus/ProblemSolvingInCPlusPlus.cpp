@@ -1752,6 +1752,20 @@ int maxSubArray(vector<int>& nums) {
 	return max_sum;
 }
 
+int lengthOfLastWord(string s) {
+	int n = s.length(), length = 0;
+
+	for (int i = n - 1; i >= 0; i--)
+	{
+		if (s[i] != ' ')
+			length++;
+
+		if (length && s[i] == ' ')
+			break;
+	}
+	return length;
+}
+
 int main()
 {
 	system("pause>0");
