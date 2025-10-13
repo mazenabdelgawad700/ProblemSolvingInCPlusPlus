@@ -1736,6 +1736,22 @@ int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
 	return solve(0, shelfWidth, 0, books, shelfWidth);
 }
 
+int maxSubArray(vector<int>& nums) {
+	int max_sum = nums[0], current_sum = 0;
+
+	for (int n : nums)
+	{
+		if (current_sum < 0)
+			current_sum = 0;
+
+		current_sum += n;
+
+		max_sum = max(max_sum, current_sum);
+	}
+
+	return max_sum;
+}
+
 int main()
 {
 	system("pause>0");
