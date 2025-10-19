@@ -1785,6 +1785,35 @@ int lastStoneWeight(vector<int>& stones) {
 	return q.size() >= 1 ? q.top() : 0;
 }
 
+int numUniqueEmails(vector<string>& emails) {
+	set<string> unique_emails;
+	int counter = 0;
+	for (int i = 0; i < emails.size(); i++)
+	{
+		string cur_email = "";
+		int index = emails[i].find_first_of('@');
+		for (int j = 0; j < index; j++)
+		{
+			if (emails[i][j] == '.')
+				continue;
+			else if (emails[i][j] == '+')
+				break;
+			else
+				cur_email += emails[i][j];
+		}
+
+		for (int j = index; j < emails[i].size(); j++)
+			cur_email += emails[i][j];
+
+		if (unique_emails.find(cur_email) == unique_emails.end())
+		{
+			unique_emails.insert(cur_email);
+			counter++;
+		}
+	}
+	return counter;
+}
+
 int main()
 {
 	system("pause>0");
