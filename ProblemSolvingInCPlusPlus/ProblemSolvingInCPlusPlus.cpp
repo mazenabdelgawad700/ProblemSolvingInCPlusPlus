@@ -1827,6 +1827,30 @@ int strStr(string haystack, string needle) {
 	return -1;
 }
 
+class MyStack {
+public:
+	deque<int> q;
+	MyStack() {
+	}
+
+	void push(int x) {
+		q.push_back(x);
+	}
+
+	int pop() {
+		int element = q.back();
+		q.pop_back();
+		return element;
+	}
+
+	int top() {
+		return q.back();
+	}
+
+	bool empty() {
+		return q.empty();
+	}
+};
 
 
 int main()
