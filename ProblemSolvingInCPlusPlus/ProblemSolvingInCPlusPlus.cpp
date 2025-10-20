@@ -1870,6 +1870,31 @@ int pivotIndex(vector<int>& nums) {
 	return -1;
 }
 
+int maxNumberOfBalloons(string text) {
+	map<char, int> dict;
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (text[i] == 'b' || text[i] == 'a' || text[i] == 'l' || text[i] == 'o' || text[i] == 'n')
+		{
+			if (dict.find(text[i]) != dict.end())
+				dict[text[i]]++;
+			else
+				dict[text[i]] = 1;
+		}
+	}
+
+	int b = dict['b'];
+	int a = dict['a'];
+	int l = dict['l'] / 2; 
+	int o = dict['o'] / 2;
+	int n = dict['n'];
+
+	int counter = min({ b, a, l, o, n });
+	return counter;
+}
+
+
+
 int main()
 {
 	system("pause>0");
