@@ -1893,6 +1893,32 @@ int maxNumberOfBalloons(string text) {
 	return counter;
 }
 
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+	vector<int> res(nums1.size());
+	bool flag = false, found_greater_number = false;
+
+	for (int i = 0; i < nums1.size(); i++)
+	{
+		for (int j = 0; j < nums2.size(); j++)
+		{
+			if (nums1[i] == nums2[j])
+				flag = true;
+			
+			if (flag && nums2[j] > nums1[i] && !found_greater_number)
+			{
+				res[i] = nums2[j];
+				found_greater_number = true;
+			}
+		}
+		if (!found_greater_number)
+			res[i] = -1;
+
+		found_greater_number = false;
+		flag = false;
+	}
+	return res;
+}
+
 
 
 int main()
