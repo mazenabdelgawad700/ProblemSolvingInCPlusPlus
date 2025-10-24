@@ -1919,7 +1919,45 @@ vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
 	return res;
 }
 
+int calPoints(vector<string>& operations) {
+	vector<int> scores;
+	int index = -1;
+	for (int i = 0; i < operations.size(); i++)
+	{
+		if (operations[i] != "+" && operations[i] != "D" && operations[i] != "C")
+		{
+			scores.push_back(stoi(operations[i]));
+			index++;
+		}
+		
+		else 
+		{
+			if (operations[i] == "C")
+			{
+				scores.erase(scores.end() - 1);
+				index--;
+			}
 
+			else if (operations[i] == "D")
+			{
+				scores.push_back(2 * scores[index]);
+				index++;
+			}
+
+			else if (operations[i] == "+")
+			{
+				scores.push_back(scores[index] + scores[index - 1]);
+				index++;
+			}
+		}
+	}
+
+	int sum = 0;
+	for (int s : scores)
+		sum += s;
+
+	return sum;
+}
 
 int main()
 {
