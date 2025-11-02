@@ -1980,6 +1980,43 @@ vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
 	return grid;
 }
 
+string longestPalindrome2(string s) {
+	string res = "";
+	int len = 0;
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		int l = i, r = i;
+
+		while (l >= 0 && r < s.size() && s[l] == s[r])
+		{
+			if (r - l + 1 > len)
+			{
+				res = s.substr(l, r - l + 1);
+				len = r - l + 1;
+			}
+
+			l--;
+			r++;
+		}
+
+		l = i, r = i + 1;
+
+		while (l >= 0 && r < s.size() && s[l] == s[r])
+		{
+			if (r - l + 1 > len)
+			{
+				res = s.substr(l, r - l + 1);
+				len = r - l + 1;
+			}
+
+			l--;
+			r++;
+		}
+	}
+	return res;
+}
+
 
 
 int main()
