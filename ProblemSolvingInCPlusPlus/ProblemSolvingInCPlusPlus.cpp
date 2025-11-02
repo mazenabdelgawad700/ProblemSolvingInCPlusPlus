@@ -2017,7 +2017,37 @@ string longestPalindrome2(string s) {
 	return res;
 }
 
+vector<vector<int>> permute(vector<int>& nums) {
+	vector<vector<int>> res;
 
+	if (nums.size() == 1) {
+		vector<vector<int>> value;
+		vector<int> num;
+		num.push_back(nums[0]);
+		value.push_back(num);
+		return value;
+	}
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		int n = nums[0];
+		nums.erase(nums.begin());
+		
+		vector<vector<int>> perms = permute(nums);
+
+		for (auto& perm : perms)
+		{
+			perm.insert(perm.begin(), 1, n);
+		}
+
+		for (auto& perm : perms)
+		{
+			res.push_back(perm);
+		}
+		nums.push_back(n);
+	}
+	return res;
+}
 
 int main()
 {
