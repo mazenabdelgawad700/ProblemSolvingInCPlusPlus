@@ -2049,6 +2049,41 @@ vector<vector<int>> permute(vector<int>& nums) {
 	return res;
 }
 
+vector<vector<int>> res;
+vector<bool> used(11, false);
+void backtrackPermute(vector<int>& nums, vector<int>& curr)
+{
+	if (curr.size() == nums.size()) 
+	{ 
+		res.push_back(curr);
+		return;
+	}
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (used[i]) 
+			continue;
+		
+		curr.push_back(nums[i]);
+		
+		used[i] = true;
+		
+		backtrackPermute(nums, curr);
+
+
+		used[i] = false;
+		
+		curr.pop_back();
+	}	
+}
+vector<vector<int>> permuteUnique(vector<int>& nums) {
+
+	vector<int> curr;
+	backtrackPermute(nums, curr);
+
+	return res;
+}
+
 int main()
 {
 	system("pause>0");
