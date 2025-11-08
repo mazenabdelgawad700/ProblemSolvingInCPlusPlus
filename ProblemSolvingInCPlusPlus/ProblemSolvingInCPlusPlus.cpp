@@ -2084,6 +2084,36 @@ vector<vector<int>> permuteUnique(vector<int>& nums) {
 	return res;
 }
 
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+	if (preorder.empty() || inorder.empty())
+		return nullptr;
+
+	TreeNode* root = new TreeNode(preorder[0]);
+
+	int rootIndex = 0;
+	for (int i = 0; i < inorder.size(); i++) {
+		if (root->val == inorder[i]) {
+			rootIndex = i;
+			break;
+		}
+	}
+
+	vector<int> left_inorder(inorder.begin(), inorder.begin() + rootIndex);
+
+	vector<int> right_inorder(inorder.begin() + rootIndex + 1,
+		inorder.end());
+
+	vector<int> left_preorder(preorder.begin() + 1,
+		preorder.begin() + 1 + left_inorder.size());
+	vector<int> right_preorder(preorder.begin() + 1 + left_inorder.size(),
+		preorder.end());
+
+	root->left = buildTree(left_preorder, left_inorder);
+	root->right = buildTree(right_preorder, right_inorder);
+
+	return root;
+}
+
 int main()
 {
 	system("pause>0");
